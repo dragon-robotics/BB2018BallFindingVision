@@ -15,7 +15,7 @@ apply plugin: 'com.analog.garage.pygrad'
 
 python {
     sourceDir = "src"
-    pythonExe = "python3"
+    pythonExe = "python"
     buildRequirements = ['pynetworktables']
 }
 
