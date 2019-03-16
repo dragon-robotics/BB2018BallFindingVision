@@ -68,7 +68,7 @@ task buildPythonVirtualEnvironment(type: Exec) {
 
 task installIPCameraApp(type: Exec) {
     dependsOn ':CameraServer:pydist'
-    commandLine "${pythonDirectory}/bin/pip", "install", "--upgrade", "--find-links", "file://${rootProject.projectDir}/CameraServer/build/python/dist", "ipcamera"
+    commandLine "${pythonDirectory}/Scripts/pip", "install", "--upgrade", "--find-links", "file://${rootProject.projectDir}/CameraServer/build/python/dist", "ipcamera"
     doLast {
         copy {
             into binDirectory
@@ -84,7 +84,7 @@ task installIPCameraApp(type: Exec) {
 
 task installNTServerApp(type: Exec) {
   dependsOn ':NTSimulator:pydist'
-  commandLine "${pythonDirectory}/bin/pip", "install", "--upgrade", "--find-links", "file://${rootProject.projectDir}/NTSimulator/build/python/dist", "ntserver"
+  commandLine "${pythonDirectory}/Scripts/pip", "install", "--upgrade", "--find-links", "file://${rootProject.projectDir}/NTSimulator/build/python/dist", "ntserver"
 }
 
 task installVisionApp(type: Copy) {
