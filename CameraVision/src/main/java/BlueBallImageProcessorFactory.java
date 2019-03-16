@@ -10,7 +10,7 @@ public class BlueBallImageProcessorFactory {
    * @param networkTable  The network table to write to
    * @return
    */
-    public static ImageProcessor CreateImageProcessor(NetworkTable networkTable) {
+    public static BallImageProcessor CreateImageProcessor(NetworkTable networkTable) {
         IBallPipeline blueBallPipeline = new BlueBallPipeline();
         return 
           new BallImageProcessor(

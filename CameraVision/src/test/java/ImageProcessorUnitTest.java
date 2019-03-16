@@ -29,12 +29,12 @@ public class ImageProcessorUnitTest
         // use Mockito to mock a pipeline and network table writer object
         IBallPipeline pipelineMock = mock(IBallPipeline.class);
         INetworkTableWriter networkTableWriterMock = mock(INetworkTableWriter.class);
-        ImageProcessor imageProcessor = new ImageProcessor(pipelineMock, networkTableWriterMock);
+        BallImageProcessor ballImageProcessor = new BallImageProcessor(pipelineMock, networkTableWriterMock);
         Mat emptyImage = new Mat();
 
         // Act
-        imageProcessor.processAsync(emptyImage);
-        imageProcessor.awaitProcessCompletion();
+        ballImageProcessor.processAsync(emptyImage);
+        ballImageProcessor.awaitProcessCompletion();
 
         //Assert
         verify(pipelineMock, times(1)).process(emptyImage);
@@ -51,12 +51,12 @@ public class ImageProcessorUnitTest
         // use Mockito to mock a pipeline and network table writer object
         IBallPipeline pipelineMock = mock(IBallPipeline.class);
         INetworkTableWriter networkTableWriterMock = mock(INetworkTableWriter.class);
-        ImageProcessor imageProcessor = new ImageProcessor(pipelineMock, networkTableWriterMock);
+        BallImageProcessor ballImageProcessor = new BallImageProcessor(pipelineMock, networkTableWriterMock);
         Mat emptyImage = new Mat();
 
         // Act
-        imageProcessor.processAsync(emptyImage);
-        imageProcessor.awaitProcessCompletion();
+        ballImageProcessor.processAsync(emptyImage);
+        ballImageProcessor.awaitProcessCompletion();
 
         //Assert
         verify(networkTableWriterMock, times(1)).write();

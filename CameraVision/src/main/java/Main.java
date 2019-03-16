@@ -88,13 +88,15 @@ public class Main {
     ImagePump imagePump = new ImagePump(imageSink);
 
     // Get image processing components.
-    ImageProcessor blueBallImageProcessor = BlueBallImageProcessorFactory.CreateImageProcessor(publishingTable);
-    ImageProcessor redBallImageProcessor = RedBallImageProcessorFactory.CreateImageProcessor(publishingTable);
+    BallImageProcessor blueBallImageProcessor = BlueBallImageProcessorFactory.CreateImageProcessor(publishingTable);
+    BallImageProcessor redBallImageProcessor = RedBallImageProcessorFactory.CreateImageProcessor(publishingTable);
+    ContourImageProcessor targetContourProcessor = TargetContourImageProcessorFactory.CreateImageProcessor(publishingTable);
 
     // Init these vars outside processing loop, as they are expensive to create.
     Mat inputImage = new Mat();
     Mat outputImage = new Mat();
     Mat outputImage2 = new Mat();
+    Mat outputImage3 = new Mat();
 
     System.out.println("Processing stream...");
 
@@ -108,18 +110,22 @@ public class Main {
         // asynchronously.  Also, pump the frame grabber for the next frame.
         redBallImageProcessor.processAsync(inputImage);
         blueBallImageProcessor.processAsync(inputImage);
+        targetContourProcessor.processAsync(inputImage);
+
         imagePump.pumpAsync();
 
         // Await image processing to finsh
         redBallImageProcessor.awaitProcessCompletion();
         blueBallImageProcessor.awaitProcessCompletion();
+        targetContourProcessor.awaitProcessCompletion();
 
         // Annotate the image
         outputImage = redBallImageProcessor.annotate(inputImage);
         outputImage2 = blueBallImageProcessor.annotate(outputImage);
+        outputImage3 = targetContourProcessor.annotate(outputImage2);
 
         // Write out the image
-        imageSource.putFrame(outputImage2);
+        imageSource.putFrame(outputImage3);
 
         // Get the next image
         inputImage = imagePump.awaitPumpCompletion();

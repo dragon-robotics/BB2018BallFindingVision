@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj.networktables.*;
  */
 public abstract class NetworkTableWriter implements INetworkTableWriter
 {
-    // ContourPipelineInterpreter contourInterpreter;
-    // BallPipelineInterpreter ballInterpreter;
+
     NetworkTable publishingTable;
 
     /**
@@ -19,46 +18,9 @@ public abstract class NetworkTableWriter implements INetworkTableWriter
      * dependencies into this class becuase this class only care about writing results
      * out to network tables, not the pre-steps requied to get there.
      * 
-     * @param ballInterpreter   The interpreter class that converts blob results to interpreted data
      * @param publishingTable   An instantiated network table that interpreted data will get written to
      */
     public NetworkTableWriter(NetworkTable publishingTable) {
         this.publishingTable = publishingTable;
     }
-
-    // public void write() {
-    //     if(ballInterpreter != null){
-    //         publishingTable.putBoolean(getBallFoundKey(), ballInterpreter.ballsFound());
-    //         publishingTable.putNumber(getBallCountKey(), ballInterpreter.ballCount());
-    //     }
-    //     else{
-    //         publishingTable.putBoolean(getContourFoundKey(), contourInterpreter.contoursFound());
-    //         publishingTable.putNumber(getContourCountKey(), contourInterpreter.contoursCount());
-    //     }
-    // }
-
-    /**
-     * Implement a unique key name of the value to be written to network tables for the
-     * ball being found on a frame.
-     */
-    // public abstract String getBallFoundKey();
-
-    /**
-     * Implement a unique key name of the count to be written to network tables for the
-     * number of balls found on the frame.
-     */
-    // public abstract String getBallCountKey();
-
-    /**
-     * Implement a unique key name of the value to be written to network tables for the
-     * ball being found on a frame.
-     */
-    // public abstract String getContourFoundKey();
-
-    /**
-     * Implement a unique key name of the count to be written to network tables for the
-     * number of balls found on the frame.
-     */
-    // public abstract String getContourCountKey();
-
 }

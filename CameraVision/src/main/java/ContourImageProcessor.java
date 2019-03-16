@@ -1,6 +1,8 @@
 import org.opencv.core.*;
 import org.opencv.features2d.Features2d;
 import org.opencv.imgproc.Imgproc;
+
+import java.util.ArrayList;
 import java.util.concurrent.*;
 
 /**
@@ -71,17 +73,28 @@ public class ContourImageProcessor extends ImageProcessor {
         // Write a processed image that you want to restream
         // This is a marked up image of what the camera sees
         
-        Features2d.Draw(
-            inputImage, 
-            pipeline.findContoursOutput(), 
-            outputImage, 
-            new Scalar(2,254,255),              // yellowish circle 
-            Features2d.DRAW_RICH_KEYPOINTS);    // draws a full-sized circle around found point(s)
-        
-        // Ident balls on image
-        for (MatOfPoint k : pipeline.findContoursOutput()) {
-            Imgproc.putText(outputImage, pipeline.getColor(), k., Core.FONT_HERSHEY_COMPLEX_SMALL, .75, new Scalar(2,254,255));
+        ArrayList<MatOfPoint> contours = pipeline.findContoursOutput();
+
+        for(int contourIdx = 0; contourIdx < contours.size(); contourIdx++){
+            
+            // Minimum size allowed for consideration
+            MatOfPoint2f approxCurve = new MatOfPoint2f();
+            MatOfPoint2f contour2f = new MatOfPoint2f(contours.get(contourIdx).toArray());
+            //Processing on mMOP2f1 which is in type MatOfPoint2f
+            double approxDistance = Imgproc.arcLength(contour2f, true)*0.02;
+            Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
+
+            //Convert back to MatOfPoint
+            MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
+
+            // Get bounding rect of contour
+            Rect rect = Imgproc.boundingRect(points);
+
+            // Ident contours on image
+            Imgproc.rectangle(inputImage, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 3);
+            Imgproc.putText(inputImage, pipeline.getColor(), new Point(rect.x, rect.y), Core.FONT_HERSHEY_COMPLEX_SMALL, .75, new Scalar(2,254,255));
         }
-        return outputImage;
+
+        return inputImage;
     }
 }
