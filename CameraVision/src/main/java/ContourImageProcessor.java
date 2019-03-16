@@ -73,23 +73,23 @@ public class ContourImageProcessor extends ImageProcessor {
         // Write a processed image that you want to restream
         // This is a marked up image of what the camera sees
         
-        ArrayList<MatOfPoint> contours = pipeline.findContoursOutput();
+        // ArrayList<MatOfPoint> contours = pipeline.findContoursOutput();
+        ArrayList<MatOfPoint> contours = pipeline.filterContoursOutput();
 
-        for(int contourIdx = 0; contourIdx < contours.size(); contourIdx++){
-            
+        for (MatOfPoint contour : contours){
             // Minimum size allowed for consideration
             MatOfPoint2f approxCurve = new MatOfPoint2f();
-            MatOfPoint2f contour2f = new MatOfPoint2f(contours.get(contourIdx).toArray());
+            MatOfPoint2f contour2f = new MatOfPoint2f(contour.toArray());
             //Processing on mMOP2f1 which is in type MatOfPoint2f
             double approxDistance = Imgproc.arcLength(contour2f, true)*0.02;
             Imgproc.approxPolyDP(contour2f, approxCurve, approxDistance, true);
-
+    
             //Convert back to MatOfPoint
             MatOfPoint points = new MatOfPoint( approxCurve.toArray() );
-
+    
             // Get bounding rect of contour
             Rect rect = Imgproc.boundingRect(points);
-
+    
             // Ident contours on image
             Imgproc.rectangle(inputImage, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height), new Scalar(255, 0, 0, 255), 3);
             Imgproc.putText(inputImage, pipeline.getColor(), new Point(rect.x, rect.y), Core.FONT_HERSHEY_COMPLEX_SMALL, .75, new Scalar(2,254,255));

@@ -13,7 +13,11 @@ public class TargetContourPipeline implements IContourPipeline {
         return pipeline.findContoursOutput();
     }
 
+    public ArrayList<MatOfPoint> filterContoursOutput(){
+        return pipeline.filterContoursOutput();
+    }
+
     public String getColor() {
-        return "Green";
+        return "Target";
     }
 }

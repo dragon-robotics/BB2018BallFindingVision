@@ -111,24 +111,26 @@ public class Main {
         // Process the image looking for respective color balls...concurrently
         // ProcessAsync chews on the image and writes to 
         // asynchronously.  Also, pump the frame grabber for the next frame.
-        redBallImageProcessor.processAsync(inputImage);
-        blueBallImageProcessor.processAsync(inputImage);
+        // redBallImageProcessor.processAsync(inputImage);
+        // blueBallImageProcessor.processAsync(inputImage);
         targetContourProcessor.processAsync(inputImage);
 
         imagePump.pumpAsync();
 
         // Await image processing to finsh
-        redBallImageProcessor.awaitProcessCompletion();
-        blueBallImageProcessor.awaitProcessCompletion();
+        // redBallImageProcessor.awaitProcessCompletion();
+        // blueBallImageProcessor.awaitProcessCompletion();
         targetContourProcessor.awaitProcessCompletion();
 
         // Annotate the image
-        outputImage = redBallImageProcessor.annotate(inputImage);
-        outputImage2 = blueBallImageProcessor.annotate(outputImage);
-        outputImage3 = targetContourProcessor.annotate(outputImage2);
+        // outputImage = redBallImageProcessor.annotate(inputImage);
+        // outputImage2 = blueBallImageProcessor.annotate(outputImage);
+        // outputImage3 = targetContourProcessor.annotate(outputImage2);
+        outputImage = targetContourProcessor.annotate(inputImage);
 
         // Write out the image
-        imageSource.putFrame(outputImage3);
+        imageSource.putFrame(outputImage);
+        // imageSource.putFrame(outputImage3);
 
         // Get the next image
         inputImage = imagePump.awaitPumpCompletion();

@@ -27,7 +27,8 @@ public class ContourPipelineInterpreter {
      * @return True if at least one contour was found
      */
     public boolean contoursFound() {
-        return !this.pipeline.findContoursOutput().isEmpty();
+        // return !this.pipeline.findContoursOutput().isEmpty();
+        return !this.pipeline.filterContoursOutput().isEmpty();
     }
 
     /**
@@ -36,6 +37,7 @@ public class ContourPipelineInterpreter {
      * @return The count of the number of contours found
      */
     public long contoursCount() {
-        return this.pipeline.findContoursOutput().size();
+        // return this.pipeline.findContoursOutput().size();
+        return this.pipeline.filterContoursOutput().size();
     }
 }
