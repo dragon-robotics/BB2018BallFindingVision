@@ -63,7 +63,7 @@ task buildPythonVirtualEnvironment(type: Exec) {
   // Assumption: venv is installed...which it is for the binary msi version of Python I got for Windows
   description "Creates a virtual python environment in the root bin directory."
   outputs.dir "${pythonDirectory}"
-  commandLine "python3", "-m", "venv", "--clear", "${pythonDirectory}"
+  commandLine "python", "-m", "venv", "--clear", "${pythonDirectory}"
 }
 
 task installIPCameraApp(type: Exec) {

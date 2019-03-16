@@ -13,7 +13,7 @@ public class BlueBallImageProcessorFactory {
     public static ImageProcessor CreateImageProcessor(NetworkTable networkTable) {
         IBallPipeline blueBallPipeline = new BlueBallPipeline();
         return 
-          new ImageProcessor(
+          new BallImageProcessor(
             blueBallPipeline, 
             new BlueBallNetworkTableWriter(
               new BallPipelineInterpreter(blueBallPipeline), 
