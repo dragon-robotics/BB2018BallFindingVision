@@ -64,6 +64,9 @@ public class Main {
     //String cameraName = "USB Camera 0";
     String cameraName = "VisionCoProc";
     HttpCamera camera = setHttpCamera(cameraName, inputStream, runtimeSettings.getCameraURL(), runtimeSettings.getNoNT());
+    camera.setExposureManual(0);      // Turn off exposure
+    camera.setBrightness(0);          // Minimize brightness
+    camera.setWhiteBalanceManual(0);  // Minimize white balance
     
     /***********************************************/
 
