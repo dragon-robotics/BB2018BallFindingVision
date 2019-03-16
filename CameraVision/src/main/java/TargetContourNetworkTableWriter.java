@@ -5,16 +5,16 @@ import edu.wpi.first.wpilibj.networktables.*;
  * 
  * @author Chuck Benedict, Mentor, Team 997
  */
-public class RedBallNetworkTableWriter extends BallNetworkTableWriter
-{
-    public RedBallNetworkTableWriter(BallPipelineInterpreter interpreter, NetworkTable publishingTable) {
+public class TargetContourNetworkTableWriter extends ContourNetworkTableWriter {
+    public TargetContourNetworkTableWriter(ContourPipelineInterpreter interpreter, NetworkTable publishingTable) {
         super(interpreter, publishingTable);
     }
 
-    public String getBallFoundKey() {
+    public String getContourFoundKey() {
         return "RedBallFound";
     }
-    public String getBallCountKey() {
+
+    public String getContourCountKey() {
         return "RedBallCount";
     }
 }

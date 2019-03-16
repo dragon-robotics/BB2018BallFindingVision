@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.networktables.*;
  * 
  * @author Chuck Benedict, Mentor, Team 997
  */
-public class BlueBallNetworkTableWriter extends NetworkTableWriter
+public class BlueBallNetworkTableWriter extends BallNetworkTableWriter
 {
     public BlueBallNetworkTableWriter(BallPipelineInterpreter interpreter, NetworkTable publishingTable) {
         super(interpreter, publishingTable);
