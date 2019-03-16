@@ -11,10 +11,10 @@ public class TargetContourNetworkTableWriter extends ContourNetworkTableWriter {
     }
 
     public String getContourFoundKey() {
-        return "RedBallFound";
+        return "TargetContourFound";
     }
 
     public String getContourCountKey() {
-        return "RedBallCount";
+        return "TargetContourCount";
     }
 }
